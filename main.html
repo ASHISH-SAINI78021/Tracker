@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Fuel | Productivity Tracker</title>
+    <title>Focus Fuel | Daily Routine Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -104,170 +104,6 @@
             color: var(--text-muted);
         }
         
-        .rule-card {
-            background: var(--dark-card);
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border-left: 4px solid var(--primary);
-        }
-        
-        .rule-icon {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-        
-        .rule-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .rule-content {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-        
-        .track-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .track-btn:hover {
-            background: var(--secondary);
-        }
-        
-        .timer-display {
-            font-size: 2.2rem;
-            font-weight: bold;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-family: monospace;
-        }
-        
-        .timer-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        button {
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        button:hover {
-            opacity: 0.9;
-        }
-        
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 15px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--dark-border);
-            color: white;
-            font-size: 1rem;
-            resize: vertical;
-            margin-bottom: 15px;
-        }
-        
-        textarea::placeholder {
-            color: var(--text-muted);
-        }
-        
-        .save-btn {
-            background: var(--success);
-            width: 100%;
-        }
-        
-        .history-card {
-            background: var(--dark-card);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-left: 3px solid var(--success);
-        }
-        
-        .history-date {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--success);
-            font-size: 0.9rem;
-        }
-        
-        .history-content {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .export-import {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .import-section {
-            background: var(--dark-card);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .instructions {
-            font-size: 0.9rem;
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-        
-        /* Mobile-specific styles */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .card-title {
-                font-size: 1.2rem;
-            }
-            
-            .stat-value {
-                font-size: 1.3rem;
-            }
-            
-            .timer-display {
-                font-size: 1.8rem;
-            }
-            
-            .export-import {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Tabs for navigation */
         .tabs {
             display: flex;
             justify-content: space-around;
@@ -300,16 +136,137 @@
             display: block;
         }
         
-        .file-input-label {
-            display: block;
-            width: 100%;
+        button {
             padding: 14px;
+            border: none;
             border-radius: 8px;
             background: var(--primary);
             color: white;
-            text-align: center;
+            font-weight: bold;
             cursor: pointer;
-            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        .routine-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .routine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .routine-info {
+            flex: 1;
+        }
+        
+        .routine-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .routine-time {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .routine-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-yes, .btn-no {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-yes {
+            background: var(--success);
+        }
+        
+        .btn-no {
+            background: var(--danger);
+        }
+        
+        .counter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .counter-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .counter-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .summary-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .summary-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .summary-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid, .summary-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -317,186 +274,195 @@
     <div class="container">
         <header>
             <h1>Focus Fuel</h1>
-            <p class="subtitle">Track your productivity journey - All data stored locally</p>
+            <p class="subtitle">Track your daily routine and productivity</p>
         </header>
         
         <div class="tabs">
-            <div class="tab active" data-tab="dashboard">Dashboard</div>
-            <div class="tab" data-tab="track">Track</div>
-            <div class="tab" data-tab="journal">Journal</div>
-            <div class="tab" data-tab="data">Data</div>
+            <div class="tab active" data-tab="today">Today</div>
+            <div class="tab" data-tab="routine">Routine</div>
+            <div class="tab" data-tab="counters">Counters</div>
+            <div class="tab" data-tab="progress">Progress</div>
         </div>
         
-        <!-- Dashboard Tab -->
-        <div class="tab-content active" id="dashboard-tab">
+        <!-- Today Tab -->
+        <div class="tab-content active" id="today-tab">
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-chart-line"></i> Today's Progress</h2>
+                <h2 class="card-title"><i class="fas fa-calendar-day"></i> Today's Progress</h2>
+                
                 <div class="stats-grid">
                     <div class="stat-box">
-                        <div class="stat-value" id="meals-today">0</div>
-                        <div class="stat-label">Meals Taken</div>
+                        <div class="stat-value" id="completed-tasks">0/11</div>
+                        <div class="stat-label">Tasks Completed</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" id="revision-today">0 min</div>
-                        <div class="stat-label">Revision Time</div>
+                        <div class="stat-value" id="success-rate">0%</div>
+                        <div class="stat-label">Success Rate</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="activity-today">0 min</div>
-                        <div class="stat-label">Physical Activity</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="urges-resisted">0</div>
-                        <div class="stat-label">Urges Resisted</div>
-                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="today-progress" style="width: 0%"></div>
                 </div>
             </div>
             
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-calendar-alt"></i> Weekly Summary</h2>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-value" id="meals-week">0</div>
-                        <div class="stat-label">Total Meals</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="revision-week">0h 0m</div>
-                        <div class="stat-label">Revision Time</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="activity-week">0h 0m</div>
-                        <div class="stat-label">Activity Time</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="urges-week">0</div>
-                        <div class="stat-label">Urges Resisted</div>
-                    </div>
+                <h2 class="card-title"><i class="fas fa-tasks"></i> Today's Routine</h2>
+                
+                <div class="routine-grid" id="today-routine">
+                    <!-- Routine items will be added here -->
                 </div>
             </div>
         </div>
         
-        <!-- Track Tab -->
-        <div class="tab-content" id="track-tab">
-            <div class="rule-card">
-                <div class="rule-icon">⏱️</div>
-                <h2 class="rule-title">Revision Time</h2>
-                <p class="rule-content">Revision is 20% of study time, not optional.</p>
-                <button class="track-btn" data-type="revision">Track Revision Time</button>
+        <!-- Routine Tab -->
+        <div class="tab-content" id="routine-tab">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-list-check"></i> Daily Routine</h2>
+                
+                <div class="routine-grid" id="routine-list">
+                    <!-- Routine items will be added here -->
+                </div>
             </div>
-            
-            <div class="rule-card">
-                <div class="rule-icon">🍎</div>
-                <h2 class="rule-title">Meals Matter</h2>
-                <p class="rule-content">Meals = focus fuel → never skip.</p>
-                <button class="track-btn" data-type="meal">Log a Meal</button>
-            </div>
-            
-            <div class="rule-card">
-                <div class="rule-icon">💪</div>
-                <h2 class="rule-title">Stay Active</h2>
-                <p class="rule-content">Physical activity → keeps mind fresh + reduces urges.</p>
-                <button class="track-btn" data-type="activity">Log Activity</button>
-            </div>
-            
-            <div class="rule-card">
-                <div class="rule-icon">🚫</div>
-                <h2 class="rule-title">Urge Management</h2>
-                <p class="rule-content">Porn urge → delay 2 min + do pushups/walk.</p>
-                <button class="track-btn" data-type="urge">I Resisted an Urge</button>
+        </div>
+        
+        <!-- Counters Tab -->
+        <div class="tab-content" id="counters-tab">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-utensils"></i> Meal Counter</h2>
+                
+                <div class="counter-container">
+                    <button class="counter-btn" id="meal-minus">-</button>
+                    <div class="counter-value" id="meal-count">0</div>
+                    <button class="counter-btn" id="meal-plus">+</button>
+                </div>
+                
+                <button id="reset-meals">Reset Meal Counter</button>
             </div>
             
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-stopwatch"></i> Urge Delay Timer</h2>
+                <h2 class="card-title"><i class="fas fa-ban"></i> Urge Counter</h2>
+                
+                <div class="counter-container">
+                    <button class="counter-btn" id="urge-minus">-</button>
+                    <div class="counter-value" id="urge-count">0</div>
+                    <button class="counter-btn" id="urge-plus">+</button>
+                </div>
+                
+                <button id="reset-urges">Reset Urge Counter</button>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-stopwatch"></i> Urge Timer</h2>
+                
                 <div class="timer-display" id="timer">02:00</div>
+                
                 <div class="timer-buttons">
                     <button id="startBtn">Start Timer</button>
-                    <button id="resetBtn">Reset</button>
+                    <button id="resetBtn">Reset Timer</button>
                 </div>
             </div>
         </div>
         
-        <!-- Journal Tab -->
-        <div class="tab-content" id="journal-tab">
+        <!-- Progress Tab -->
+        <div class="tab-content" id="progress-tab">
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-book"></i> Evening Journal</h2>
-                <textarea id="journal-entry" placeholder="What went well today? What can I improve tomorrow? (Write for 5 minutes)"></textarea>
-                <button class="save-btn" id="save-journal">Save Entry</button>
+                <h2 class="card-title"><i class="fas fa-chart-pie"></i> Weekly Progress</h2>
+                
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-value" id="wake-up-percentage">0%</div>
+                        <div class="summary-label">Wake Up at 4 AM</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="dsa-percentage">0%</div>
+                        <div class="summary-label">DSA Practice</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="revision-percentage">0%</div>
+                        <div class="summary-label">Revision Completed</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="meals-percentage">0%</div>
+                        <div class="summary-label">Meals Taken</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="porn-free-percentage">0%</div>
+                        <div class="summary-label">Porn-Free Days</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="sleep-percentage">0%</div>
+                        <div class="summary-label">Slept by 10 PM</div>
+                    </div>
+                </div>
             </div>
             
-            <h2 class="card-title"><i class="fas fa-history"></i> Recent Entries</h2>
-            <div id="journal-history">
-                <!-- Journal entries will be added here dynamically -->
-            </div>
-        </div>
-        
-        <!-- Data Tab -->
-        <div class="tab-content" id="data-tab">
             <div class="card">
-                <h2 class="card-title"><i class="fas fa-database"></i> Data Management</h2>
-                
-                <div class="export-import">
-                    <button id="export-data">Export Data</button>
-                    <button id="import-data">Import Data</button>
+                <h2 class="card-title"><i class="fas fa-calendar-week"></i> This Week</h2>
+                <div id="weekly-chart">
+                    <!-- Weekly chart will be rendered here -->
                 </div>
-                
-                <button id="reset-data" style="background: var(--danger); width: 100%; margin-top: 10px;">Reset All Data</button>
-            </div>
-            
-            <div class="import-section">
-                <h2 class="card-title"><i class="fas fa-file-excel"></i> Import from Excel</h2>
-                
-                <div class="instructions">
-                    <p><strong>How to import Excel data:</strong></p>
-                    <ol>
-                        <li>Save your Excel file as CSV</li>
-                        <li>Make sure it has columns: Date, Type, Value</li>
-                        <li>Click "Choose CSV File" below</li>
-                        <li>Select your exported CSV file</li>
-                    </ol>
-                </div>
-                
-                <label for="csv-file" class="file-input-label">
-                    <i class="fas fa-upload"></i> Choose CSV File
-                </label>
-                <input type="file" id="csv-file" accept=".csv" style="display: none;">
-                
-                <div id="import-preview" style="margin-top: 15px;"></div>
             </div>
         </div>
-        
-        <footer style="text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">
-            <p>All data is stored locally on your device. Your privacy is maintained.</p>
-        </footer>
     </div>
 
     <script>
-        // Data structure
-        let userData = {
-            meals: [],
-            revision: [],
-            activity: [],
-            urges: [],
-            journal: []
-        };
-        
         // DOM Elements
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const todayRoutineContainer = document.getElementById('today-routine');
+        const routineListContainer = document.getElementById('routine-list');
+        const weeklyChartContainer = document.getElementById('weekly-chart');
+        
+        // Counter elements
+        const mealCountElement = document.getElementById('meal-count');
+        const mealPlusBtn = document.getElementById('meal-plus');
+        const mealMinusBtn = document.getElementById('meal-minus');
+        const resetMealsBtn = document.getElementById('reset-meals');
+        
+        const urgeCountElement = document.getElementById('urge-count');
+        const urgePlusBtn = document.getElementById('urge-plus');
+        const urgeMinusBtn = document.getElementById('urge-minus');
+        const resetUrgesBtn = document.getElementById('reset-urges');
+        
+        // Timer elements
         const timerDisplay = document.getElementById('timer');
         const startBtn = document.getElementById('startBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const journalTextarea = document.getElementById('journal-entry');
-        const saveJournalBtn = document.getElementById('save-journal');
-        const journalHistory = document.getElementById('journal-history');
-        const trackButtons = document.querySelectorAll('.track-btn');
-        const exportBtn = document.getElementById('export-data');
-        const importBtn = document.getElementById('import-data');
-        const resetBtnData = document.getElementById('reset-data');
-        const csvFileInput = document.getElementById('csv-file');
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Routine data structure
+        const routineItems = [
+            { id: 'wakeup', title: 'Wake Up', time: '4:00 AM', completed: false },
+            { id: 'dsa', title: 'DSA Practice', time: '4:00 - 6:00 AM', completed: false },
+            { id: 'walk', title: 'Walk/Stretch', time: '6:00 - 6:30 AM', completed: false },
+            { id: 'revision', title: 'Revision', time: '6:30 - 7:30 AM', completed: false },
+            { id: 'breakfast', title: 'Breakfast', time: 'Morning', completed: false },
+            { id: 'library', title: 'Library/Classes', time: 'Daytime', completed: false },
+            { id: 'lunch', title: 'Lunch', time: 'Noon', completed: false },
+            { id: 'mocktest', title: 'Mock/Test/Contest', time: 'Afternoon', completed: false },
+            { id: 'evening', title: 'Evening Activity', time: 'Evening', completed: false },
+            { id: 'dinner', title: 'Dinner', time: 'Evening', completed: false },
+            { id: 'pornfree', title: 'Porn-Free', time: 'All Day', completed: false },
+            { id: 'sleep', title: 'Sleep by 10 PM', time: '10:00 PM', completed: false }
+        ];
+        
+        // Data storage
+        let todayData = {
+            date: new Date().toDateString(),
+            meals: 0,
+            urges: 0,
+            routine: {}
+        };
+        
+        let weeklyData = {};
+        
+        // Timer variables
+        let timeLeft = 2 * 60;
+        let timerInterval = null;
         
         // Initialize
         loadData();
-        updateStats();
-        renderJournalHistory();
+        initializeRoutine();
+        updateUI();
         
         // Tab navigation
         tabs.forEach(tab => {
@@ -509,13 +475,213 @@
                 
                 tab.classList.add('active');
                 document.getElementById(`${tabId}-tab`).classList.add('active');
+                
+                // If switching to progress tab, update statistics
+                if (tabId === 'progress') {
+                    updateWeeklyStats();
+                }
             });
         });
         
-        // Timer functionality
-        let timeLeft = 2 * 60;
-        let timerInterval = null;
+        // Initialize routine items
+        function initializeRoutine() {
+            // Clear containers
+            todayRoutineContainer.innerHTML = '';
+            routineListContainer.innerHTML = '';
+            
+            // Add routine items
+            routineItems.forEach(item => {
+                const routineElement = createRoutineElement(item);
+                todayRoutineContainer.appendChild(routineElement.cloneNode(true));
+                routineListContainer.appendChild(routineElement);
+            });
+        }
         
+        // Create routine element
+        function createRoutineElement(item) {
+            const div = document.createElement('div');
+            div.className = 'routine-item';
+            div.id = `routine-${item.id}`;
+            
+            div.innerHTML = `
+                <div class="routine-info">
+                    <div class="routine-title">${item.title}</div>
+                    <div class="routine-time">${item.time}</div>
+                </div>
+                <div class="routine-actions">
+                    <button class="btn-yes" data-id="${item.id}" data-value="yes">Yes</button>
+                    <button class="btn-no" data-id="${item.id}" data-value="no">No</button>
+                </div>
+            `;
+            
+            // Set initial state
+            if (todayData.routine[item.id] === 'yes') {
+                div.style.background = 'rgba(16, 185, 129, 0.1)';
+            } else if (todayData.routine[item.id] === 'no') {
+                div.style.background = 'rgba(239, 68, 68, 0.1)';
+            }
+            
+            // Add event listeners
+            div.querySelector('.btn-yes').addEventListener('click', () => updateRoutineItem(item.id, 'yes'));
+            div.querySelector('.btn-no').addEventListener('click', () => updateRoutineItem(item.id, 'no'));
+            
+            return div;
+        }
+        
+        // Update routine item
+        function updateRoutineItem(id, value) {
+            todayData.routine[id] = value;
+            saveData();
+            updateUI();
+            
+            // Update visual state
+            const element = document.getElementById(`routine-${id}`);
+            if (value === 'yes') {
+                element.style.background = 'rgba(16, 185, 129, 0.1)';
+            } else {
+                element.style.background = 'rgba(239, 68, 68, 0.1)';
+            }
+        }
+        
+        // Update UI
+        function updateUI() {
+            // Update completed tasks count
+            const completedCount = Object.values(todayData.routine).filter(v => v === 'yes').length;
+            const totalCount = routineItems.length;
+            
+            document.getElementById('completed-tasks').textContent = `${completedCount}/${totalCount}`;
+            
+            // Update success rate
+            const successRate = Math.round((completedCount / totalCount) * 100);
+            document.getElementById('success-rate').textContent = `${successRate}%`;
+            
+            // Update progress bar
+            document.getElementById('today-progress').style.width = `${successRate}%`;
+            
+            // Update counters
+            mealCountElement.textContent = todayData.meals;
+            urgeCountElement.textContent = todayData.urges;
+        }
+        
+        // Update weekly statistics
+        function updateWeeklyStats() {
+            // Calculate weekly percentages
+            const weeklyPercentages = calculateWeeklyStats();
+            
+            // Update percentage values
+            document.getElementById('wake-up-percentage').textContent = `${weeklyPercentages.wakeup}%`;
+            document.getElementById('dsa-percentage').textContent = `${weeklyPercentages.dsa}%`;
+            document.getElementById('revision-percentage').textContent = `${weeklyPercentages.revision}%`;
+            document.getElementById('meals-percentage').textContent = `${weeklyPercentages.meals}%`;
+            document.getElementById('porn-free-percentage').textContent = `${weeklyPercentages.pornfree}%`;
+            document.getElementById('sleep-percentage').textContent = `${weeklyPercentages.sleep}%`;
+            
+            // Render weekly chart
+            renderWeeklyChart();
+        }
+        
+        // Calculate weekly statistics
+        function calculateWeeklyStats() {
+            // This is a simplified version - in a real app, you'd calculate based on weeklyData
+            return {
+                wakeup: Math.floor(Math.random() * 100),
+                dsa: Math.floor(Math.random() * 100),
+                revision: Math.floor(Math.random() * 100),
+                meals: Math.floor(Math.random() * 100),
+                pornfree: Math.floor(Math.random() * 100),
+                sleep: Math.floor(Math.random() * 100)
+            };
+        }
+        
+        // Render weekly chart
+        function renderWeeklyChart() {
+            weeklyChartContainer.innerHTML = '';
+            
+            // Create a simple bar chart for each day of the week
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            
+            days.forEach(day => {
+                const percentage = Math.floor(Math.random() * 100);
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.style.marginBottom = '10px';
+                
+                const label = document.createElement('div');
+                label.textContent = `${day}: ${percentage}%`;
+                label.style.marginBottom = '5px';
+                label.style.fontSize = '0.9rem';
+                label.style.display = 'flex';
+                label.style.justifyContent = 'space-between';
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.width = '100%';
+                barContainer.style.height = '10px';
+                barContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+                barContainer.style.borderRadius = '5px';
+                barContainer.style.overflow = 'hidden';
+                
+                const barFill = document.createElement('div');
+                barFill.style.width = '0%';
+                barFill.style.height = '100%';
+                barFill.style.background = `linear-gradient(90deg, var(--primary), var(--accent))`;
+                barFill.style.transition = 'width 1s ease-in-out';
+                barFill.style.borderRadius = '5px';
+                
+                barContainer.appendChild(barFill);
+                dayDiv.appendChild(label);
+                dayDiv.appendChild(barContainer);
+                
+                weeklyChartContainer.appendChild(dayDiv);
+                
+                // Animate the bar
+                setTimeout(() => {
+                    barFill.style.width = `${percentage}%`;
+                }, 100);
+            });
+        }
+        
+        // Counter functionality
+        mealPlusBtn.addEventListener('click', () => {
+            todayData.meals++;
+            saveData();
+            updateUI();
+        });
+        
+        mealMinusBtn.addEventListener('click', () => {
+            if (todayData.meals > 0) {
+                todayData.meals--;
+                saveData();
+                updateUI();
+            }
+        });
+        
+        resetMealsBtn.addEventListener('click', () => {
+            todayData.meals = 0;
+            saveData();
+            updateUI();
+        });
+        
+        urgePlusBtn.addEventListener('click', () => {
+            todayData.urges++;
+            saveData();
+            updateUI();
+        });
+        
+        urgeMinusBtn.addEventListener('click', () => {
+            if (todayData.urges > 0) {
+                todayData.urges--;
+                saveData();
+                updateUI();
+            }
+        });
+        
+        resetUrgesBtn.addEventListener('click', () => {
+            todayData.urges = 0;
+            saveData();
+            updateUI();
+        });
+        
+        // Timer functionality
         function updateTimer() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
@@ -527,7 +693,6 @@
                 timerDisplay.style.color = '#10b981';
                 startBtn.textContent = 'Start Timer';
                 alert('Time is up! You successfully delayed the urge. Keep going!');
-                logUrgeResistance();
             } else {
                 timeLeft--;
             }
@@ -557,322 +722,81 @@
             startBtn.textContent = 'Start Timer';
         });
         
-        // Track buttons
-        trackButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const type = this.getAttribute('data-type');
-                
-                switch(type) {
-                    case 'meal':
-                        logMeal();
-                        break;
-                    case 'revision':
-                        logRevision();
-                        break;
-                    case 'activity':
-                        logActivity();
-                        break;
-                    case 'urge':
-                        logUrgeResistance();
-                        break;
-                }
-            });
-        });
-        
-        // Journal functionality
-        saveJournalBtn.addEventListener('click', saveJournalEntry);
-        
-        // Data functions
-        function logMeal() {
-            userData.meals.push({
-                date: new Date().toISOString(),
-                type: 'meal'
-            });
-            saveData();
-            updateStats();
-            alert('Meal logged successfully! 🍎');
-        }
-        
-        function logRevision() {
-            const minutes = prompt('How many minutes did you spend revising?');
-            if (minutes && !isNaN(minutes) && minutes > 0) {
-                userData.revision.push({
-                    date: new Date().toISOString(),
-                    minutes: parseInt(minutes)
-                });
-                saveData();
-                updateStats();
-                alert(`${minutes} minutes of revision logged! 📚`);
-            }
-        }
-        
-        function logActivity() {
-            const minutes = prompt('How many minutes were you active?');
-            if (minutes && !isNaN(minutes) && minutes > 0) {
-                userData.activity.push({
-                    date: new Date().toISOString(),
-                    minutes: parseInt(minutes)
-                });
-                saveData();
-                updateStats();
-                alert(`${minutes} minutes of activity logged! 💪`);
-            }
-        }
-        
-        function logUrgeResistance() {
-            userData.urges.push({
-                date: new Date().toISOString(),
-                type: 'urge_resisted'
-            });
-            saveData();
-            updateStats();
-            alert('Urge resistance logged! Stay strong! 💪');
-        }
-        
-        function saveJournalEntry() {
-            const text = journalTextarea.value.trim();
-            if (text) {
-                userData.journal.push({
-                    date: new Date().toISOString(),
-                    text: text
-                });
-                saveData();
-                journalTextarea.value = '';
-                renderJournalHistory();
-                alert('Journal entry saved! 📝');
-            } else {
-                alert('Please write something in your journal before saving.');
-            }
-        }
-        
-        function renderJournalHistory() {
-            // Show only the last 6 entries
-            const recentEntries = userData.journal.slice(-6).reverse();
-            
-            journalHistory.innerHTML = '';
-            
-            if (recentEntries.length === 0) {
-                journalHistory.innerHTML = '<div class="history-card">No journal entries yet. Start writing!</div>';
-                return;
-            }
-            
-            recentEntries.forEach(entry => {
-                const date = new Date(entry.date);
-                const card = document.createElement('div');
-                card.className = 'history-card';
-                card.innerHTML = `
-                    <div class="history-date">${date.toLocaleDateString()}</div>
-                    <div class="history-content">${entry.text}</div>
-                `;
-                journalHistory.appendChild(card);
-            });
-        }
-        
-        function updateStats() {
-            const today = new Date().toDateString();
-            
-            // Today's stats
-            const mealsToday = userData.meals.filter(meal => new Date(meal.date).toDateString() === today).length;
-            const revisionToday = userData.revision.filter(rev => new Date(rev.date).toDateString() === today)
-                .reduce((total, rev) => total + rev.minutes, 0);
-            const activityToday = userData.activity.filter(act => new Date(act.date).toDateString() === today)
-                .reduce((total, act) => total + act.minutes, 0);
-            const urgesToday = userData.urges.filter(urge => new Date(urge.date).toDateString() === today).length;
-            
-            document.getElementById('meals-today').textContent = mealsToday;
-            document.getElementById('revision-today').textContent = `${revisionToday} min`;
-            document.getElementById('activity-today').textContent = `${activityToday} min`;
-            document.getElementById('urges-resisted').textContent = urgesToday;
-            
-            // Weekly stats (last 7 days)
-            const oneWeekAgo = new Date();
-            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            
-            const mealsWeek = userData.meals.filter(meal => new Date(meal.date) >= oneWeekAgo).length;
-            const revisionWeek = userData.revision.filter(rev => new Date(rev.date) >= oneWeekAgo)
-                .reduce((total, rev) => total + rev.minutes, 0);
-            const activityWeek = userData.activity.filter(act => new Date(act.date) >= oneWeekAgo)
-                .reduce((total, act) => total + act.minutes, 0);
-            const urgesWeek = userData.urges.filter(urge => new Date(urge.date) >= oneWeekAgo).length;
-            
-            const revisionHours = Math.floor(revisionWeek / 60);
-            const revisionMins = revisionWeek % 60;
-            
-            const activityHours = Math.floor(activityWeek / 60);
-            const activityMins = activityWeek % 60;
-            
-            document.getElementById('meals-week').textContent = mealsWeek;
-            document.getElementById('revision-week').textContent = `${revisionHours}h ${revisionMins}m`;
-            document.getElementById('activity-week').textContent = `${activityHours}h ${activityMins}m`;
-            document.getElementById('urges-week').textContent = urgesWeek;
-        }
-        
+        // Data persistence
         function saveData() {
-            localStorage.setItem('focusFuelData', JSON.stringify(userData));
+            // Save today's data
+            localStorage.setItem('focusFuelTodayData', JSON.stringify(todayData));
+            
+            // Initialize weekly data if needed
+            if (!localStorage.getItem('focusFuelWeeklyData')) {
+                localStorage.setItem('focusFuelWeeklyData', JSON.stringify({}));
+            } else {
+                weeklyData = JSON.parse(localStorage.getItem('focusFuelWeeklyData'));
+            }
+            
+            // Check if we need to reset for a new day
+            checkNewDay();
         }
         
         function loadData() {
-            const savedData = localStorage.getItem('focusFuelData');
-            if (savedData) {
-                userData = JSON.parse(savedData);
-            }
-        }
-        
-        // Export/Import functionality
-        exportBtn.addEventListener('click', () => {
-            const dataStr = JSON.stringify(userData);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportFileDefaultName = 'focus_fuel_data.json';
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
-        });
-        
-        importBtn.addEventListener('click', () => {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = e => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
+            // Load today's data
+            const savedTodayData = localStorage.getItem('focusFuelTodayData');
+            if (savedTodayData) {
+                todayData = JSON.parse(savedTodayData);
                 
-                reader.onload = function(e) {
-                    try {
-                        const importedData = JSON.parse(e.target.result);
-                        userData = importedData;
-                        saveData();
-                        updateStats();
-                        renderJournalHistory();
-                        alert('Data imported successfully!');
-                    } catch (error) {
-                        alert('Error importing data. Please make sure you selected a valid backup file.');
-                    }
-                };
-                
-                reader.readAsText(file);
-            };
-            
-            input.click();
-        });
-        
-        // CSV Import
-        csvFileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const csvData = e.target.result;
-                processCSVData(csvData);
-            };
-            reader.readAsText(file);
-        });
-        
-        function processCSVData(csvData) {
-            const lines = csvData.split('\n');
-            const preview = document.getElementById('import-preview');
-            preview.innerHTML = '<h3>Preview of data to import:</h3>';
-            
-            const table = document.createElement('table');
-            table.style.width = '100%';
-            table.style.marginTop = '10px';
-            table.style.borderCollapse = 'collapse';
-            
-            // Process each line
-            for (let i = 0; i < Math.min(lines.length, 6); i++) {
-                if (lines[i].trim() === '') continue;
-                
-                const cells = lines[i].split(',');
-                const row = document.createElement('tr');
-                
-                cells.forEach(cell => {
-                    const td = document.createElement('td');
-                    td.textContent = cell;
-                    td.style.padding = '8px';
-                    td.style.border = '1px solid #333';
-                    row.appendChild(td);
-                });
-                
-                table.appendChild(row);
-                
-                // For the first data row, show import button
-                if (i === 1) {
-                    const importButton = document.createElement('button');
-                    importButton.textContent = 'Import This Data';
-                    importButton.style.marginTop = '15px';
-                    importButton.style.width = '100%';
-                    importButton.onclick = function() {
-                        importCSVData(lines);
-                    };
-                    preview.appendChild(importButton);
-                }
-            }
-            
-            preview.appendChild(table);
-        }
-        
-        function importCSVData(lines) {
-            // Simple CSV import logic - would need to be customized based on your CSV format
-            for (let i = 1; i < lines.length; i++) {
-                if (lines[i].trim() === '') continue;
-                
-                const cells = lines[i].split(',');
-                if (cells.length >= 3) {
-                    const date = cells[0].trim();
-                    const type = cells[1].trim();
-                    const value = cells[2].trim();
+                // Check if this is a new day
+                if (todayData.date !== new Date().toDateString()) {
+                    // Save yesterday's data to weekly storage
+                    saveToWeeklyData();
                     
-                    // This is a simplified example - you'd need to customize based on your CSV structure
-                    if (type === 'meal') {
-                        userData.meals.push({ date, type: 'meal' });
-                    } else if (type === 'revision') {
-                        userData.revision.push({ date, minutes: parseInt(value) || 0 });
-                    } else if (type === 'activity') {
-                        userData.activity.push({ date, minutes: parseInt(value) || 0 });
-                    } else if (type === 'urge') {
-                        userData.urges.push({ date, type: 'urge_resisted' });
-                    }
+                    // Reset for new day
+                    todayData = {
+                        date: new Date().toDateString(),
+                        meals: 0,
+                        urges: 0,
+                        routine: {}
+                    };
                 }
             }
             
-            saveData();
-            updateStats();
-            alert('CSV data imported successfully!');
-            document.getElementById('import-preview').innerHTML = '';
+            // Load weekly data
+            const savedWeeklyData = localStorage.getItem('focusFuelWeeklyData');
+            if (savedWeeklyData) {
+                weeklyData = JSON.parse(savedWeeklyData);
+            }
         }
         
-        resetBtnData.addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
-                localStorage.removeItem('focusFuelData');
-                userData = {
-                    meals: [],
-                    revision: [],
-                    activity: [],
-                    urges: [],
-                    journal: []
+        function checkNewDay() {
+            if (todayData.date !== new Date().toDateString()) {
+                // Save yesterday's data to weekly storage
+                saveToWeeklyData();
+                
+                // Reset for new day
+                todayData = {
+                    date: new Date().toDateString(),
+                    meals: 0,
+                    urges: 0,
+                    routine: {}
                 };
-                updateStats();
-                renderJournalHistory();
-                alert('All data has been reset.');
+                
+                // Update UI
+                updateUI();
+                initializeRoutine();
             }
-        });
+        }
         
-        // Add a five-minute writing reminder
-        let writingTimer;
-        
-        journalTextarea.addEventListener('focus', () => {
-            writingTimer = setTimeout(() => {
-                alert("You've been writing for 5 minutes. Great job reflecting on your day!");
-            }, 5 * 60 * 1000);
-        });
-        
-        journalTextarea.addEventListener('blur', () => {
-            clearTimeout(writingTimer);
-        });
+        function saveToWeeklyData() {
+            // Get yesterday's date
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayString = yesterday.toDateString();
+            
+            // Add to weekly data
+            weeklyData[yesterdayString] = todayData;
+            
+            // Save weekly data
+            localStorage.setItem('focusFuelWeeklyData', JSON.stringify(weeklyData));
+        }
     </script>
 </body>
 </html>
