@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Fuel | Productivity Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-border: #333;
+            --primary: #7c3aed;
+            --secondary: #6d28d9;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 8px 0;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .rule-card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .rule-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .rule-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .rule-content {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+        
+        .track-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .track-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .timer-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .timer-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--dark-border);
+            color: white;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .save-btn {
+            background: var(--success);
+            width: 100%;
+        }
+        
+        .history-card {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--success);
+        }
+        
+        .history-date {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+        
+        .history-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .export-import {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .import-section {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .instructions {
+            font-size: 0.9rem;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .timer-display {
+                font-size: 1.8rem;
+            }
+            
+            .export-import {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tabs for navigation */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 8px;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .file-input-label {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Focus Fuel</h1>
+            <p class="subtitle">Track your productivity journey - All data stored locally</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="dashboard">Dashboard</div>
+            <div class="tab" data-tab="track">Track</div>
+            <div class="tab" data-tab="journal">Journal</div>
+            <div class="tab" data-tab="data">Data</div>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div class="tab-content active" id="dashboard-tab">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-chart-line"></i> Today's Progress</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value" id="meals-today">0</div>
+                        <div class="stat-label">Meals Taken</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="revision-today">0 min</div>
+                        <div class="stat-label">Revision Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="activity-today">0 min</div>
+                        <div class="stat-label">Physical Activity</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="urges-resisted">0</div>
+                        <div class="stat-label">Urges Resisted</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-calendar-alt"></i> Weekly Summary</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value" id="meals-week">0</div>
+                        <div class="stat-label">Total Meals</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="revision-week">0h 0m</div>
+                        <div class="stat-label">Revision Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="activity-week">0h 0m</div>
+                        <div class="stat-label">Activity Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="urges-week">0</div>
+                        <div class="stat-label">Urges Resisted</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Track Tab -->
+        <div class="tab-content" id="track-tab">
+            <div class="rule-card">
+                <div class="rule-icon">⏱️</div>
+                <h2 class="rule-title">Revision Time</h2>
+                <p class="rule-content">Revision is 20% of study time, not optional.</p>
+                <button class="track-btn" data-type="revision">Track Revision Time</button>
+            </div>
+            
+            <div class="rule-card">
+                <div class="rule-icon">🍎</div>
+                <h2 class="rule-title">Meals Matter</h2>
+                <p class="rule-content">Meals = focus fuel → never skip.</p>
+                <button class="track-btn" data-type="meal">Log a Meal</button>
+            </div>
+            
+            <div class="rule-card">
+                <div class="rule-icon">💪</div>
+                <h2 class="rule-title">Stay Active</h2>
+                <p class="rule-content">Physical activity → keeps mind fresh + reduces urges.</p>
+                <button class="track-btn" data-type="activity">Log Activity</button>
+            </div>
+            
+            <div class="rule-card">
+                <div class="rule-icon">🚫</div>
+                <h2 class="rule-title">Urge Management</h2>
+                <p class="rule-content">Porn urge → delay 2 min + do pushups/walk.</p>
+                <button class="track-btn" data-type="urge">I Resisted an Urge</button>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-stopwatch"></i> Urge Delay Timer</h2>
+                <div class="timer-display" id="timer">02:00</div>
+                <div class="timer-buttons">
+                    <button id="startBtn">Start Timer</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Journal Tab -->
+        <div class="tab-content" id="journal-tab">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-book"></i> Evening Journal</h2>
+                <textarea id="journal-entry" placeholder="What went well today? What can I improve tomorrow? (Write for 5 minutes)"></textarea>
+                <button class="save-btn" id="save-journal">Save Entry</button>
+            </div>
+            
+            <h2 class="card-title"><i class="fas fa-history"></i> Recent Entries</h2>
+            <div id="journal-history">
+                <!-- Journal entries will be added here dynamically -->
+            </div>
+        </div>
+        
+        <!-- Data Tab -->
+        <div class="tab-content" id="data-tab">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-database"></i> Data Management</h2>
+                
+                <div class="export-import">
+                    <button id="export-data">Export Data</button>
+                    <button id="import-data">Import Data</button>
+                </div>
+                
+                <button id="reset-data" style="background: var(--danger); width: 100%; margin-top: 10px;">Reset All Data</button>
+            </div>
+            
+            <div class="import-section">
+                <h2 class="card-title"><i class="fas fa-file-excel"></i> Import from Excel</h2>
+                
+                <div class="instructions">
+                    <p><strong>How to import Excel data:</strong></p>
+                    <ol>
+                        <li>Save your Excel file as CSV</li>
+                        <li>Make sure it has columns: Date, Type, Value</li>
+                        <li>Click "Choose CSV File" below</li>
+                        <li>Select your exported CSV file</li>
+                    </ol>
+                </div>
+                
+                <label for="csv-file" class="file-input-label">
+                    <i class="fas fa-upload"></i> Choose CSV File
+                </label>
+                <input type="file" id="csv-file" accept=".csv" style="display: none;">
+                
+                <div id="import-preview" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+        
+        <footer style="text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">
+            <p>All data is stored locally on your device. Your privacy is maintained.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data structure
+        let userData = {
+            meals: [],
+            revision: [],
+            activity: [],
+            urges: [],
+            journal: []
+        };
+        
+        // DOM Elements
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const journalTextarea = document.getElementById('journal-entry');
+        const saveJournalBtn = document.getElementById('save-journal');
+        const journalHistory = document.getElementById('journal-history');
+        const trackButtons = document.querySelectorAll('.track-btn');
+        const exportBtn = document.getElementById('export-data');
+        const importBtn = document.getElementById('import-data');
+        const resetBtnData = document.getElementById('reset-data');
+        const csvFileInput = document.getElementById('csv-file');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Initialize
+        loadData();
+        updateStats();
+        renderJournalHistory();
+        
+        // Tab navigation
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(t => t.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+        
+        // Timer functionality
+        let timeLeft = 2 * 60;
+        let timerInterval = null;
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft === 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                timerDisplay.style.color = '#10b981';
+                startBtn.textContent = 'Start Timer';
+                alert('Time is up! You successfully delayed the urge. Keep going!');
+                logUrgeResistance();
+            } else {
+                timeLeft--;
+            }
+        }
+        
+        startBtn.addEventListener('click', () => {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                startBtn.textContent = 'Resume Timer';
+            } else {
+                if (timeLeft === 0) {
+                    timeLeft = 2 * 60;
+                    timerDisplay.style.color = 'white';
+                }
+                timerInterval = setInterval(updateTimer, 1000);
+                startBtn.textContent = 'Pause Timer';
+            }
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 2 * 60;
+            timerDisplay.textContent = '02:00';
+            timerDisplay.style.color = 'white';
+            startBtn.textContent = 'Start Timer';
+        });
+        
+        // Track buttons
+        trackButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const type = this.getAttribute('data-type');
+                
+                switch(type) {
+                    case 'meal':
+                        logMeal();
+                        break;
+                    case 'revision':
+                        logRevision();
+                        break;
+                    case 'activity':
+                        logActivity();
+                        break;
+                    case 'urge':
+                        logUrgeResistance();
+                        break;
+                }
+            });
+        });
+        
+        // Journal functionality
+        saveJournalBtn.addEventListener('click', saveJournalEntry);
+        
+        // Data functions
+        function logMeal() {
+            userData.meals.push({
+                date: new Date().toISOString(),
+                type: 'meal'
+            });
+            saveData();
+            updateStats();
+            alert('Meal logged successfully! 🍎');
+        }
+        
+        function logRevision() {
+            const minutes = prompt('How many minutes did you spend revising?');
+            if (minutes && !isNaN(minutes) && minutes > 0) {
+                userData.revision.push({
+                    date: new Date().toISOString(),
+                    minutes: parseInt(minutes)
+                });
+                saveData();
+                updateStats();
+                alert(`${minutes} minutes of revision logged! 📚`);
+            }
+        }
+        
+        function logActivity() {
+            const minutes = prompt('How many minutes were you active?');
+            if (minutes && !isNaN(minutes) && minutes > 0) {
+                userData.activity.push({
+                    date: new Date().toISOString(),
+                    minutes: parseInt(minutes)
+                });
+                saveData();
+                updateStats();
+                alert(`${minutes} minutes of activity logged! 💪`);
+            }
+        }
+        
+        function logUrgeResistance() {
+            userData.urges.push({
+                date: new Date().toISOString(),
+                type: 'urge_resisted'
+            });
+            saveData();
+            updateStats();
+            alert('Urge resistance logged! Stay strong! 💪');
+        }
+        
+        function saveJournalEntry() {
+            const text = journalTextarea.value.trim();
+            if (text) {
+                userData.journal.push({
+                    date: new Date().toISOString(),
+                    text: text
+                });
+                saveData();
+                journalTextarea.value = '';
+                renderJournalHistory();
+                alert('Journal entry saved! 📝');
+            } else {
+                alert('Please write something in your journal before saving.');
+            }
+        }
+        
+        function renderJournalHistory() {
+            // Show only the last 6 entries
+            const recentEntries = userData.journal.slice(-6).reverse();
+            
+            journalHistory.innerHTML = '';
+            
+            if (recentEntries.length === 0) {
+                journalHistory.innerHTML = '<div class="history-card">No journal entries yet. Start writing!</div>';
+                return;
+            }
+            
+            recentEntries.forEach(entry => {
+                const date = new Date(entry.date);
+                const card = document.createElement('div');
+                card.className = 'history-card';
+                card.innerHTML = `
+                    <div class="history-date">${date.toLocaleDateString()}</div>
+                    <div class="history-content">${entry.text}</div>
+                `;
+                journalHistory.appendChild(card);
+            });
+        }
+        
+        function updateStats() {
+            const today = new Date().toDateString();
+            
+            // Today's stats
+            const mealsToday = userData.meals.filter(meal => new Date(meal.date).toDateString() === today).length;
+            const revisionToday = userData.revision.filter(rev => new Date(rev.date).toDateString() === today)
+                .reduce((total, rev) => total + rev.minutes, 0);
+            const activityToday = userData.activity.filter(act => new Date(act.date).toDateString() === today)
+                .reduce((total, act) => total + act.minutes, 0);
+            const urgesToday = userData.urges.filter(urge => new Date(urge.date).toDateString() === today).length;
+            
+            document.getElementById('meals-today').textContent = mealsToday;
+            document.getElementById('revision-today').textContent = `${revisionToday} min`;
+            document.getElementById('activity-today').textContent = `${activityToday} min`;
+            document.getElementById('urges-resisted').textContent = urgesToday;
+            
+            // Weekly stats (last 7 days)
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+            
+            const mealsWeek = userData.meals.filter(meal => new Date(meal.date) >= oneWeekAgo).length;
+            const revisionWeek = userData.revision.filter(rev => new Date(rev.date) >= oneWeekAgo)
+                .reduce((total, rev) => total + rev.minutes, 0);
+            const activityWeek = userData.activity.filter(act => new Date(act.date) >= oneWeekAgo)
+                .reduce((total, act) => total + act.minutes, 0);
+            const urgesWeek = userData.urges.filter(urge => new Date(urge.date) >= oneWeekAgo).length;
+            
+            const revisionHours = Math.floor(revisionWeek / 60);
+            const revisionMins = revisionWeek % 60;
+            
+            const activityHours = Math.floor(activityWeek / 60);
+            const activityMins = activityWeek % 60;
+            
+            document.getElementById('meals-week').textContent = mealsWeek;
+            document.getElementById('revision-week').textContent = `${revisionHours}h ${revisionMins}m`;
+            document.getElementById('activity-week').textContent = `${activityHours}h ${activityMins}m`;
+            document.getElementById('urges-week').textContent = urgesWeek;
+        }
+        
+        function saveData() {
+            localStorage.setItem('focusFuelData', JSON.stringify(userData));
+        }
+        
+        function loadData() {
+            const savedData = localStorage.getItem('focusFuelData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+            }
+        }
+        
+        // Export/Import functionality
+        exportBtn.addEventListener('click', () => {
+            const dataStr = JSON.stringify(userData);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'focus_fuel_data.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        });
+        
+        importBtn.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        userData = importedData;
+                        saveData();
+                        updateStats();
+                        renderJournalHistory();
+                        alert('Data imported successfully!');
+                    } catch (error) {
+                        alert('Error importing data. Please make sure you selected a valid backup file.');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        });
+        
+        // CSV Import
+        csvFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const csvData = e.target.result;
+                processCSVData(csvData);
+            };
+            reader.readAsText(file);
+        });
+        
+        function processCSVData(csvData) {
+            const lines = csvData.split('\n');
+            const preview = document.getElementById('import-preview');
+            preview.innerHTML = '<h3>Preview of data to import:</h3>';
+            
+            const table = document.createElement('table');
+            table.style.width = '100%';
+            table.style.marginTop = '10px';
+            table.style.borderCollapse = 'collapse';
+            
+            // Process each line
+            for (let i = 0; i < Math.min(lines.length, 6); i++) {
+                if (lines[i].trim() === '') continue;
+                
+                const cells = lines[i].split(',');
+                const row = document.createElement('tr');
+                
+                cells.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    td.style.padding = '8px';
+                    td.style.border = '1px solid #333';
+                    row.appendChild(td);
+                });
+                
+                table.appendChild(row);
+                
+                // For the first data row, show import button
+                if (i === 1) {
+                    const importButton = document.createElement('button');
+                    importButton.textContent = 'Import This Data';
+                    importButton.style.marginTop = '15px';
+                    importButton.style.width = '100%';
+                    importButton.onclick = function() {
+                        importCSVData(lines);
+                    };
+                    preview.appendChild(importButton);
+                }
+            }
+            
+            preview.appendChild(table);
+        }
+        
+        function importCSVData(lines) {
+            // Simple CSV import logic - would need to be customized based on your CSV format
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue;
+                
+                const cells = lines[i].split(',');
+                if (cells.length >= 3) {
+                    const date = cells[0].trim();
+                    const type = cells[1].trim();
+                    const value = cells[2].trim();
+                    
+                    // This is a simplified example - you'd need to customize based on your CSV structure
+                    if (type === 'meal') {
+                        userData.meals.push({ date, type: 'meal' });
+                    } else if (type === 'revision') {
+                        userData.revision.push({ date, minutes: parseInt(value) || 0 });
+                    } else if (type === 'activity') {
+                        userData.activity.push({ date, minutes: parseInt(value) || 0 });
+                    } else if (type === 'urge') {
+                        userData.urges.push({ date, type: 'urge_resisted' });
+                    }
+                }
+            }
+            
+            saveData();
+            updateStats();
+            alert('CSV data imported successfully!');
+            document.getElementById('import-preview').innerHTML = '';
+        }
+        
+        resetBtnData.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
+                localStorage.removeItem('focusFuelData');
+                userData = {
+                    meals: [],
+                    revision: [],
+                    activity: [],
+                    urges: [],
+                    journal: []
+                };
+                updateStats();
+                renderJournalHistory();
+                alert('All data has been reset.');
+            }
+        });
+        
+        // Add a five-minute writing reminder
+        let writingTimer;
+        
+        journalTextarea.addEventListener('focus', () => {
+            writingTimer = setTimeout(() => {
+                alert("You've been writing for 5 minutes. Great job reflecting on your day!");
+            }, 5 * 60 * 1000);
+        });
+        
+        journalTextarea.addEventListener('blur', () => {
+            clearTimeout(writingTimer);
+        });
+    </script>
+</body>
+</html>
